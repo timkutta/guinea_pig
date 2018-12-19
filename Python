@@ -1,1 +1,2 @@
 create new python file: touch <name>.py
+create new directory: mkdir <name> (after navigation to that place)
