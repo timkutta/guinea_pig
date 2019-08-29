@@ -1,0 +1,358 @@
+%% Update beginning 31 Jul 2018
+
+%% Using AMS 'art' document type (recommended for articles).
+\documentclass[12pt,a4paper]{amsart}
+%% Additional packages.
+\usepackage[margin = 2cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathrsfs}
+\usepackage{multirow}
+\usepackage{diagbox}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{bbm}
+\usepackage{mathabx}
+\usepackage{natbib}
+
+
+
+%% Declaring macros for writing theorems, corollaries etc.
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\newtheoremstyle{definition}{}{}{}{}{\bfseries}{}{ }{}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+
+ \newcommand{\HD}{\textcolor{red}}
+\newcommand{\chk}{\textcolor{red}}
+
+%% Changing the theorem style now to 'remark' for remarks and examples.
+\theoremstyle{remark}
+
+%% Declaring the macros for writing remarks and examples.
+\newtheorem{rem0,ark}{Remark}
+\newtheorem{example}{Example}
+
+%% Text editing commands (one makes red text and the other blue text).
+\newcommand{\bluetext}[1]{{\color{blue} #1}}
+\newcommand{\redtext}[1]{{\color{red} #1}}
+%% Error related terminology and estimators
+\def\cdf{\F}
+\def\estcdf{\hF}
+\def\bootscdf{\hat{F}_n^*}
+\def\dens{f_\varepsilon}
+\def\bootsdens{f_n^*}
+\def\bootsresk{\hat{\varepsilon}_\k^*}
+\def\bootsest{\hat{g}^*}
+\def\resk{\hat{\varepsilon}_\mathbf{k}}
+\def\resestk{\hat{\varepsilon}_\mathbf{k}}
+\def\k{\mathbf{k}}
+\def\K{\mathbf{K}}
+
+
+%% Custom math macros
+%% Commands for special functions and special variables.
+\def\funk{g}
+\def\est{\hat{g}}
+\def\R{\mathcal{R}}
+\def\desk{z_\mathbf{k}}
+\def\weight{w_\mathbf{k}}
+\def\Var{\mathrm{Var}}
+\def\1{\mathbf{1}}
+\def\ve{\varepsilon}
+\def\hve{\hat{\ve}}
+\def\shat{\hat{\sigma}}
+\def\hKtheta{\widehat{K\theta}}
+\def\htheta{\hat{\theta}}
+\def\hg{\hat{g}}
+\def\hphig{\hat{\phi}_g}
+\def\ivec{\mathbf{i}}
+\def\idot{\ivec_{\bullet}}
+\def\uvec{\mathbf{u}}
+\def\vvec{\mathbf{v}}
+\def\xvec{\mathbf{x}}
+\def\yvec{\mathbf{y}}
+\def\kvec{\mathbf{k}}
+\def\Rhat{\hat{R}}
+\def\F{\mathbb{F}}
+\def\hF{\hat{\mathbb{F}}_n}
+\def\halpha{\hat{\alpha}}
+\def\KhmT{\mathbb{T}}
+\def\varphiconj{\overline{\varphi}}
+
+%% Standard asymptotic order commands.
+\def\op{o_P(1)}
+\def\Op{O_P(1)}
+\def\opn{o_P(n^{-1/2})}
+\def\Opn{O_P(n^{-1/2})}
+
+%% Commands for special spaces.
+\def\RR{\mathbb{R}}
+\def\CC{\mathscr{C}}
+\def\Zint{\mathbb{Z}}
+\def\Lclass{\mathcal{L}}
+\def\WW{\mathcal{W}}
+\def\MM{\mathcal{M}}
+\def\Jn{\mathbb{J}_n}
+\def\PP{\mathscr{P}}
+
+%% Commands for brackets
+\def\lb{\left(}
+\def\rb{\right)}
+\def\la{\left|}
+\def\ra{\right|}
+\def\lbr{\left[}
+\def\rbr{\right]}
+\def\lbp{\left<}
+\def\rbp{\right>}
+
+%% Global document shape parameters.
+\textwidth 17cm
+\textheight 222mm
+
+%% Estimator related terminology
+\def\GS{B_{(k_1, k_2)}}
+\def\GSk{B_\mathbf{k}}
+\def\weightk{w_\mathbf{k}}
+\def\weight{w_{(k_1,k_2)}}
+\def\weight{w_{\mathbf{k}}}
+\def\rp{R(l,m)}
+\def\rpN{\hat{R}(l,m)}
+\def\rpnu{R_g(\nu)}
+\def\rpNnu{\hat{R}_N(\nu)}
+\def\band{h_n}
+\def\dn{\Delta_n}
+
+%% Other stuff
+\def\smoothindex{\tau}
+ %smoothness index < v
+ \def\smoothp{\tilde{\tau}}
+ \def\smoothpp{\tilde{t}}
+\def\trunc{d_n} %truncation parameter for proof
+\def\truncres{\varepsilon_\k^{d_n}} %truncated residual for proof
+\def\smoothoc{\mathfrak{O}(v, L)}
+\def\smoothel1{\mathcal{E}(v)}
+\def\smoothel2{\mathfrak{O}(\tau,1)}
+
+\parindent 0cm
+
+ \renewcommand{\baselinestretch}{1.2}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\numberwithin{equation}{section}
+
+\renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
+
+\allowdisplaybreaks
+
+\begin{document}
+\section{Statistical tests}
+
+\subsection{Mean, Median}
+
+\subsubsection{Unpaired Data}
+
+\begin{itemize}
+\item[1.] $t$-Test (one sample)
+\begin{itemize}
+\item \textit{Data}:  One sample for real valued data $X_1,...,X_n$ with mean $\mu$.
+\item \textit{Hypothesis}: For some fixed $\mu_0$: $\mu =, \le, \ge \mu_0$. 
+\item \textit{Conditions}: $X_i$ are iid, $X_i \sim \mathcal{N}(\mu, \sigma^2)$
+\item \textit{Statistic and details}: We investigate
+$$T= \sqrt{n}\frac{\bar{X}-\mu_0}{S}, \quad \textnormal{where} \quad S=\sqrt{\frac{\sum_{i=1}^n (X_i-\bar{X})^2}{n-1}}.$$
+Under the conditions $T$ is $t$-distributed with $n-1$ degrees of freedom. 
+\item \textit{Violation of assumptions}:
+One usually says that for $n>30$ normality can be dropped. In the simulations the test performs well for non-normal even below $n=30$. However there is some power loss. Still for $n=15$ and $X_i$ binomial with size $5$ and $p=0.5$ rejection probability for $\mu_0=2$ is still $>55\%$.  The $\alpha$-error is usually bounded by $5\%$. An exception was found for exponential distributions in small samples.
+\item \textit{Further discussion:} Under normality of $X_i$ the distribution of $T$ is exactly given by $t$-student distribution. For large enough $n$ the statistic is $\approx \mathcal{N}((\mu-\mu_0)/\sigma, 1)$ in any case. \\
+\end{itemize}
+
+\item[2.] $t$-Test (two sample)
+\begin{itemize}
+\item \textit{Data}:  Two samples of real valued data $X_1,...,X_n$ with mean $\mu_X$ and $Y_1,...,Y_m$ with mean $\mu_Y$.
+\item \textit{Hypothesis}: For some fixed $w_0$: $\mu_X-\mu_Y=,<,>w_0$. 
+\item \textit{Conditions}: $X_i, Y_i$ are all iid, normal, with the same variance $\sigma^2$
+\item \textit{Statistic and details}: We investigate
+$$T= \frac{\bar{X}-\bar{Y}-w_0}{S\sqrt{1/n+1/m}}, \quad \textnormal{where} \quad S=\sqrt{\frac{(n-1)S_X^2+(m-1)S_Y^2}{n+m-2}}.$$
+$S_X^2$ and $S_Y^2$ denote the sample variances. $T$ is $t$-distributed with $n+m-2$ degrees of freedom.
+\item \textit{Violation of assumptions}:
+Violation of the normal assumption affects the $t$-test to a moderate degree both in inflating the level $\alpha$-error and decreasing its power (at least this is true for simulations of laplace and exponential data). Generally even for small sample sizes as $15$ the Type I error is close to the theoretical results. Deviating from equal sample sizes reduces the power compared to the Welch-test, but the Type I error is still in check. For unequal variances the Type I error may explode. \\
+\end{itemize}
+
+\item[3.] Welsh-t-test
+\begin{itemize}
+\item \textit{Data}:  Two samples of real valued data $X_1,...,X_n$ with mean $\mu_X$ and $Y_1,...,Y_m$ with mean $\mu_Y$.
+\item \textit{Hypothesis}: $\mu_X=\mu_Y$. 
+\item \textit{Conditions}: Both samples are normally distributed and each is i.i.d.
+\item \textit{Statistic and details}: We investigate
+$$T= \frac{\bar{X}-\bar{Y}}{\sqrt{s_X^2/n+s_Y^2/m}}.$$
+Here $s_X^2, s_Y^2$ are the sample variances.
+ The distribution of $T$ can be approximated by a $t$-distribution. Its degrees of freedom are given by the Welch–Satterthwaite equation. 
+\item \textit{Violation of assumptions}:
+Violating normality messes with the $\chi^2$-approximation for the Welch–Satterthwaite equation. However for large samples this might again work due to a CLT. In the literature it is said that Welsh test performs stable under non-normal settings if the variances are equal. In our simulations it is even than stable, at least for non-scew distributions, which tend to cause problems.
+\item \textit{Further discussion:} The Welch-test neither relies on equal variances, nor on equal sample sizes. The power and $\alpha$-error are by our simulations practically identical, for normal data, binomial data, exponential data, laplace data in small, equal sample sizes. For different sample sizes the differences are not very marked, but it slightly outperforms the traditional $t$-test. It sems like the Welch-version keeps its level better at minimal power loss. It can therefore be often recommended. The Welsh test is often tacitly applied by programs if the variances differ. \\
+\end{itemize}
+\item[4] Wilcoxon-Mann-Whithney-test
+\begin{itemize}
+\item \textit{Data}:  Two samples of ordinal data $X_1,...,X_n$ and $Y_1,...,Y_m$.
+\item \textit{Hypothesis}: $\mathbb{P}(X \le Y) = 0.5$.
+\item \textit{Conditions}: Both samples are  i.i.d.
+\item \textit{Statistic and details}:Count the number of "victories" of $X$-set over $Y$-set by pairwise comparisons. Ties count as $0.5$. The sum is the statistic $U_X$. By simulated tables exact values of $U_X$ are known. For large samples a normal approximation is possible:
+$$ \frac{U-nm/2}{\sqrt{nm(n+m+1)/12}}\approx \mathcal{N}(0,1).$$
+The above formula has to be corrected in the presence of ties. 
+
+\item \textit{Violation of assumptions}: The test works under very moderate assumptions. Problems occured in the simulations if the sample sizes and variances where strongly different. For $n=60, m=30, \sigma_X=1, \sigma_Y=2$ and significance level $0.1$ Wilcoxon had a Type I error or $15\%$.  Furthermore if the values of the variances where switched the effect disappeared. However in most cases the test was quite robust.
+
+
+\item \textit{Further discussion:} For normal data the test is generally outperformed by $t$-tests. However the simulated power losses where moderate (rarely above $\approx 2\%$; e.g. samples of size $40$ for standard normal and shifted normal by $0.2$ the power was for $t$-test $22.7\%$ and for Wilcoxon $22.1\%$). For non-normal data it outperforms Welch test in particular for scew data like shifted exponential data. The effect in the simulations was quite strong $n=m=20$, exponential with parameter $1$ and one sample shifted by $0.4$; $t$-test: $37\%$ and Wilcoxon $56\%$. For binomial data (even Bernoulli) there was no real difference between the tests. For different variances (facotr of $4$ for normals and samples of size $30$) the Type I error is slightly inflated (less than $2\%$) and little power was lost compared to Welch.  
+\end{itemize}
+\end{itemize}
+
+\subsection{Variance - different topics}
+
+\subsection{Distribution assumptions}
+\subsubsection{Checking for a distribution}
+
+\begin{itemize}
+\item[1.] Shapiro-Wilk-Test
+\begin{itemize}
+\item \textit{Data}:  A sample of real valued random variables $X_1,...,X_n$.
+\item \textit{Hypothesis}: $X_i$ are all normally distributed according to $\mathcal{N}(\mu_X, \sigma_X^2)$.
+\item \textit{Conditions}: The sample is i.i.d.
+\item \textit{Statistic and details}: We investigate
+$$W=\frac{b^2}{(n-1)s_X^2}.$$
+Here $s_X^2$ is the sample variance and $b^2$ a different variance estimator based omn a least squares estimation. For normality the statistic should be about $1$.
+\item \textit{Violation of assumptions}:
+The test only works for $3<n<5000$. 
+
+\item \textit{Further discussion:} To apply the test usually means assuming that there are no ties in the data (as may be assumed for normal data). If ties are present the Sheppard-correction may be applied.  It is important to notice the difference to other statistical tests: We basically assume that the data is normally distributed and will only for remarkable events deviate from this assumption. Example: For a sample of $n=20$ Binomial of size $5$ and success-probability $0.5$ we will conclude normality as often as not if we use level $\alpha=0.05$. In general decreasing $\alpha$ will mean accepting more distributions as normal. However for increasing samples the power of the test rises comparatively fast. \\
+
+
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Checking for a independence}
+
+\begin{itemize}
+\item[1.] $\chi^2$-test
+\begin{itemize}
+\item \textit{Data}: Two samples of categorical valued data$X_1,...,X_n$ and $Y_1,...Y_m$. The categories for $X$ are calles $c_X^1,...,c_X^K$ and for $Y$ $c_Y^1,...,c_Y^L$. 
+\item \textit{Hypothesis}: The data generating mechanisms of $X$ and $Y$ are independent.
+\item \textit{Conditions}: All data is independent, in groups the same distribution.
+\item \textit{Statistic and details}: Let $a_{k,l}$ be the number  $|\{X_i=c_k, Y_j=c_l\}|$. Then we consider 
+$$\chi^2=\sum_{k=1}^K \sum_{l=1} ^L \frac{(a_{l,k}-a_{l,k}^*)^2}{a_{l,k}^*} \quad \textnormal{where} \quad a_{l,k}^*:=\frac{a_{l, \bullet}a_{\bullet,k}}{n+m}.$$
+The idea is for all possible events to check wether the probability $\mathbb{P}(X=c_k, Y_=c_l)$ factorizes. 
+\item \textit{Violation of assumptions}: The sample size should not be too small, otherwise the test lacks power. Even for $2\times 2$ it should certainly not be less than $n+m=100$ (estimate based on some limited simulations).
+
+\item \textit{Further discussion:} If the amount of data falling in any of the classes is very small, i.e. some $a_{k,l}$ are very small/equal to $0$, one might consider joining features. Otherwise convergence to a $\chi^2$-distribution is unclear. However the distribution under the $0$  can also be simulated via bootstrap, by factoring the marginal distributions.  \\
+
+
+\end{itemize}
+\end{itemize}
+
+\subsection{Likelihood ratio tests}
+
+\section{Regression}
+
+\subsection{Linear models}
+
+\subsubsection{Multiple regression}
+
+\begin{itemize}
+\item[1.] \textit{Model:} Let $\mathbf{y}$ be an $n$-dimensional vector of responses, $ \mathbb{X}\in \mathbb{R}^{n \times k}$ a design matrix, $\beta$ the $k$-dim vector of regression coefficients and $\varepsilon$ an $n$-dim error. 
+$$\mathbf{y}=\mathbb{X}\beta+\varepsilon.$$
+\item[2.] \textit{Assumptions:} Typically we assume 
+\begin{itemize}
+\item $\mathbb{E}\varepsilon=0$ and that indeed $\mathbb{E}\mathbf{Y}= \mathbb{X}\beta$.
+\item $cov(\varepsilon_i, \varepsilon_j)=0$ for $i \neq j$. 
+\item $\mathbb{C}(\varepsilon)=\sigma^2 E_n$, where $\mathbb{C}(\varepsilon)$ denotes the covariance matrix of the error.
+\end{itemize}
+Sometimes the last assumption is dropped leading to \textit{weighted least squares.}
+\item[3.] \textit{Estimation:} Estimation is usually done via least squares minimization, i.e. minimizing
+$$\hat{\varepsilon}^t\hat{\varepsilon}=\sum_{i=1}^n (y_i-\sum_{j=1}^k)^2 x_{i,j} \beta_j,$$
+leading to the estimators 
+$$\hat{\beta}=(\mathbb{X}^t\mathbb{X})^{-1}\mathbb{X}^t \mathbf{y} \quad \textnormal{and} \quad s^2= \frac{1}{n-k-1} \sum_{i=1}^n (y_i-\mathbf{x}_i^t \hat{\beta})^2.$$
+$\hat{\beta}$ is the best linear, unbiased estimator and $s^2$ the best squared linear estimator of $\beta$ and $\sigma^2$ respectively. In case of normality both estimators are MLE and optimal among all unbiased estimators.
+\item[4.] \textit{Violation of assumptions:} 
+\begin{itemize}
+\item If the covariance matrix is of the form $\sigma^2 V$ for some small bandwidth matrix $V$, then the ordinary least squares estimators are unbiased but have suboptimally large variances.
+\item If too many or not enough explanatory variables are considered this leads either to biased estimators (expressed by an alias matrix) or to larger variance of the estimators.
+\end{itemize}
+\item[5.] \textit{Statistical inference:} 
+Here normality of the errors is required
+\begin{itemize}
+\item Testing wether $\beta=0$ is done by a global $F$-test.
+\item Testing for a subset of coefficients $beta_{sub}=0$ is done by an $F$-test combined with a reduced model approach.
+\item General linear hypotheses can be testes, i.e. for some matrix $\mathbb{C}$ and some vector $\mathbf{t}$: $\mathbb{C}\beta=\mathbf{t}$.
+\item Confidence regions for $\beta, \sigma^2, \beta_j$ can be derived. 
+\end{itemize}
+\end{itemize}
+
+\subsection{General linear models}
+
+\subsection{Generalized linear models}
+
+Generalized linear models are parametric statistical models. The observations $Y_1,...,Y_n$ are assumed to be distributed according to a density, which belongs to an exponential family. More precisely the distribution of $Y_i$ can be stated as
+$$ f(y_i; \theta_i, \phi)= \exp \Big(\frac{y \theta_i - b(\theta_i)}{a(\phi)}+c(y_i, \phi) \Big).$$
+Here we have the following notations
+\begin{itemize}
+\item $\theta_i=g(\mu_i)$, where $\mathbb{E}Y_i=\mu_i$ and $g$ is the so called link function. 
+\item $a, b, c$ are functions characteristic for the distribution in hand.
+\item $\phi$ is a scaling parameter (relevant for the variance).
+\end{itemize}
+
+Important examples are: binomial (for known number of trials), Poisson, negative binomial, Gaussian, exponential, chi-squared, Laplacian, gamma. A counterexample is $t$-student.
+
+In GLM it is assumed that $\theta_i =g(\mu_i)= \beta^T X_i$, i.e. it is a linear combination of the $X_i$. In theory the link function should be chosen to yield this linear identity. In practice one looks at the assumed distribution of the $Y_i$ and chooses a corresponding link function, where the common choices are called "canonical links". Examples: 
+\begin{align*} 
+\textnormal{normal:} & \quad \textnormal{identity} \\
+\textnormal{binomial:} & \quad \log\Big( \frac{\mu_i}{1-\mu_i}\Big) \\
+\textnormal{Poisson:} & \quad \log(\mu_i)
+\end{align*}
+
+ The specific form of the GLMs is used to perform ML-estimation, which is consistent and asymptotically normal, such that asymptotic tests and confidene intervals can be derived (see: Wald's test). Furthermore these estimators are efficient (optimal). Likelihood-ratio tests can serve to inquire model validation. 
+ 
+ 
+ An important example is the \textbf{Poisson regression}. Here we model 
+ $$ \mu_i= \prod_i \exp(x_i \beta_i),$$
+which gives a natural interpretation of the coefficients: If $\beta_i$ is positive, the factor $x_i$ yields a positive effect, which can be interpreted by $\exp(x_i*\beta_i)$. Tests for model relevance and even single $\beta_i =0$ are available by Wald. Poisson regression plays an important role where count-data is concerned. However, since the equality of mean and variance often leads two "overdispension" (more variance in the data, than can be explained by the rigid Poisson model) one commonly switches to the more flexible negative binomial model. An alternative is to introduce more factors, which increase explanatory power of the variance. 
+
+
+
+\subsection{Non-parametric regression}
+
+\section{Sum of squares expansion}
+For wide classes of linear models, the total sum of squares equals the explained sum of squares plus the residual sum of squares. In analysis of variance (ANOVA) the total sum of squares is the sum of the so-called "within-samples" sum of squares and "between-samples" sum of squares, i.e., partitioning of the sum of squares.
+The total sum of squares (TSS) can be written as the sum of the sum of squares explained (SSE) and the sum of squares residual (SSR):
+\begin{align*}
+TSS= \sum_{i=1}^n \left(y_i-\overline{y}\right)^2 = \sum_{i=1}^n \left(\hat{y_i}-\overline{y}\right)^2+\sum_{i=1}^n \left(y_i-\hat{y_i}\right)^2=SSE+SSR
+\end{align*}
+A small SSR indicates a good model fit
+
+
+\section{Estimation}
+
+\subsection{MLE}
+
+\section{Statistical distributions}
+
+
+
+\section{Theoretical basics}
+
+
+
+\section{Density estimation}
+
+\section{High dimensional data}
+
+
+%\section{Socurces}
+
+%multiple regression: http://www.utstat.toronto.edu/~brunner/books/LinearModelsInStatistics.pdf
+\end{document}
