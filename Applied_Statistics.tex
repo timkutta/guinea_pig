@@ -152,7 +152,7 @@
 \allowdisplaybreaks
 
 \begin{document}
-\section{\textcolor{red}{Statistical tests}}
+\section{Statistical tests}
 
 \subsection{Mean, Median}
 
@@ -181,10 +181,7 @@ One usually says that for $n>30$ normality can be dropped. In the simulations th
 $$T= \frac{\bar{X}-\bar{Y}-w_0}{S\sqrt{1/n+1/m}}, \quad \textnormal{where} \quad S=\sqrt{\frac{(n-1)S_X^2+(m-1)S_Y^2}{n+m-2}}.$$
 $S_X^2$ and $S_Y^2$ denote the sample variances. $T$ is $t$-distributed with $n+m-2$ degrees of freedom.
 \item \textit{Violation of assumptions}:
-Violation of the normal assumption affects the $t$-test to a moderate degree both in inflating the level $\alpha$-error and
-decreasing its power (at least this is true for simulations of laplace and exponential data). Generally even for small sample
-sizes as $15$ the Type I error is close to the theoretical results. Deviating from equal sample sizes reduces the power 
-compared to the Welch-test, but the Type I error is still in check. For unequal variances the Type I error may explode. \\
+Violation of the normal assumption affects the $t$-test to a moderate degree both in inflating the level $\alpha$-error and decreasing its power (at least this is true for simulations of laplace and exponential data). Generally even for small sample sizes as $15$ the Type I error is close to the theoretical results. Deviating from equal sample sizes reduces the power compared to the Welch-test, but the Type I error is still in check. For unequal variances the Type I error may explode. \\
 \end{itemize}
 
 \item[3.] Welsh-t-test
@@ -258,7 +255,7 @@ The idea is for all possible events to check wether the probability $\mathbb{P}(
 \end{itemize}
 \end{itemize}
 
-\subsection{Likelihood ratio tests}
+\subsection{Likelihood ratio tests} %cutting edge statistics
 
 \section{Regression}
 
@@ -298,7 +295,7 @@ Here normality of the errors is required
 
 \subsection{General linear models}
 
-\subsection{Generalized linear models}
+\subsection{Generalized linear models} %Auf eine gute Zusammenarbeit
 
 Generalized linear models are parametric statistical models. The observations $Y_1,...,Y_n$ are assumed to be distributed according to a density, which belongs to an exponential family. More precisely the distribution of $Y_i$ can be stated as
 $$ f(y_i; \theta_i, \phi)= \exp \Big(\frac{y \theta_i - b(\theta_i)}{a(\phi)}+c(y_i, \phi) \Big).$$
@@ -327,7 +324,7 @@ which gives a natural interpretation of the coefficients: If $\beta_i$ is positi
 
 
 
-\subsection{Non-parametric regression}
+\subsection{Non-parametric regression} %LLT ist eine Zicke
 
 \section{Sum of squares expansion}
 For wide classes of linear models, the total sum of squares equals the explained sum of squares plus the residual sum of squares. In analysis of variance (ANOVA) the total sum of squares is the sum of the so-called "within-samples" sum of squares and "between-samples" sum of squares, i.e., partitioning of the sum of squares.
