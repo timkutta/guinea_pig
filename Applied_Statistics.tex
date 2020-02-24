@@ -152,7 +152,9 @@
 \allowdisplaybreaks
 
 \begin{document}
-\section{\textcolor{red}{Statistical tests}}
+
+\section{Statistical tests}
+
 
 \subsection{Mean, Median}
 
@@ -258,7 +260,7 @@ The idea is for all possible events to check wether the probability $\mathbb{P}(
 \end{itemize}
 \end{itemize}
 
-\subsection{Likelihood ratio tests}
+\subsection{Likelihood ratio tests} %cutting edge statistics
 
 \section{Regression}
 
@@ -298,7 +300,7 @@ Here normality of the errors is required
 
 \subsection{General linear models}
 
-\subsection{Generalized linear models}
+\subsection{Generalized linear models} %Auf eine gute Zusammenarbeit
 
 Generalized linear models are parametric statistical models. The observations $Y_1,...,Y_n$ are assumed to be distributed according to a density, which belongs to an exponential family. More precisely the distribution of $Y_i$ can be stated as
 $$ f(y_i; \theta_i, \phi)= \exp \Big(\frac{y \theta_i - b(\theta_i)}{a(\phi)}+c(y_i, \phi) \Big).$$
@@ -327,7 +329,7 @@ which gives a natural interpretation of the coefficients: If $\beta_i$ is positi
 
 
 
-\subsection{Non-parametric regression}
+\subsection{Non-parametric regression} %LLT ist eine Zicke
 
 \section{Sum of squares expansion}
 For wide classes of linear models, the total sum of squares equals the explained sum of squares plus the residual sum of squares. In analysis of variance (ANOVA) the total sum of squares is the sum of the so-called "within-samples" sum of squares and "between-samples" sum of squares, i.e., partitioning of the sum of squares.
@@ -335,7 +337,24 @@ The total sum of squares (TSS) can be written as the sum of the sum of squares e
 \begin{align*}
 TSS= \sum_{i=1}^n \left(y_i-\overline{y}\right)^2 = \sum_{i=1}^n \left(\hat{y_i}-\overline{y}\right)^2+\sum_{i=1}^n \left(y_i-\hat{y_i}\right)^2=SSE+SSR.
 \end{align*}
-A small SSR indicates a good model fit
+A small SSR indicates a good model fit %Theresa
+
+\subsection{ANOVA}
+
+
+\begin{itemize}
+\item\textit{Data:} $Y_{i,j}$ where $i=1,...,k$ (number of groups) and $j=1,...,n_i$ (individuals in $i$th group)
+\item\textit{Hypothesis:}  $\mu_1=...=\mu_k$ (All group means are equal)
+\item \textit{Assumptions}: Independence, normality and homoscedasticity of of residuals ($\varepsilon_{i,j } \sim \mathcal{N}(0, \sigma^2) \,\, \forall i,j$).
+\item \textit{Statistic and details}: The statistic is an $F$-statistic
+$$ F=\frac{SSE/(k-1)}{SSR/(\sum_i \{n_i\}-k)}.$$
+Here 
+$$SSR= \sum_i \sum_j (Y_{i,j}- \bar Y_{i,\bullet})^2, \quad\quad SSE= \sum_i \sum_j (\bar Y_{i,\bullet}- \bar Y)^2.$$
+$F$ is $F$-distributed with $k-1$-degrees of freedom. The intuition of the statistic is: If the means of the groups vary a lot (numerator), while there is only little fluctuation inside the groups (denominator), the statistic is large and the hypothesis of equal expectations is rejected.
+\item  \textit{Violation of assumptions}: The ANOVA is for larger sample sizes robust against violations of normality. Different variances are a problem if the groups have different sizes. One might apply the "Brown–Forsythe-Test"for skewed or heavy tailed distributions. Non-parametric alternatives like the  Kruskal-Wallis-Test exist. The data may be transformed (log-transform if the errors are multiplicative; depends on what model makes sense). 
+\item \textit{Further discussion:} 
+\end{itemize}
+
 
 
 \section{Estimation}
