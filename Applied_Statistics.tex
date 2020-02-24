@@ -239,6 +239,16 @@ The test only works for $3<n<5000$.
 
 
 \end{itemize}
+\item[2.] Kolmogorov-Smirnov-Test
+\begin{itemize}
+\item \textit{Data}:  A sample of real valued random variables $X_1,...,X_n$.
+\item \textit{Hypothesis}: $F_X(x)=F_0(x)$ (one sample test), $F_1(x)=F_2(x)$ (two sample test). 
+\item \textit{Conditions}: The sample is i.i.d. with continous distribution function
+\item \textit{Statistic and details}: \textbf{One sample test:} Compute the empirical distribution function $$F_n(x)=\frac{1}{n}\sum_{i=1}^n I_{(-\infty,x]}(X_i)$$ and compute $$D_n=\sup_x \left|F_n(x)-F(x)\right|.$$ Under $H_0$, we have $$\sqrt{n} D_n \rightarrow \sup_{t} \left|B(F(t))\right|$$ (the \textit{Kolmogorov distribution}), which does not depend on $F$ if $F$ is continuous. Thus we reject $H_0$ for $$\sqrt{n}D_n>K_{\alpha},$$ where $K_{\alpha}$ is the $(1-\alpha)$-quantile of the Kolmogorov distribution. \\
+\textbf{Two sample test:} Compute $$D_{n,m}=\sup_{x} \left|F_{1,n}(x)-F_{2,m}(x)\right|$$ and reject $H_0$ for large values of $D_{n,m}$. 
+
+\end{itemize}
+
 \end{itemize}
 
 \subsubsection{Checking for a independence}
