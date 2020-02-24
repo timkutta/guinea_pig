@@ -7,3 +7,6 @@ Pakete installieren:
 pip install scrapy
 
 Command to trnasform txt to ipynb file: mv <filename>.txt <filename>.ipynb
+
+In der Konsole z. B. mergen "beenden" (nach Texteingabe): esc:q (-> weg); esc:x (-> speichern)
+
