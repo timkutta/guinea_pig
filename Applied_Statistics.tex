@@ -334,6 +334,23 @@ TSS= \sum_{i=1}^n \left(y_i-\overline{y}\right)^2 = \sum_{i=1}^n \left(\hat{y_i}
 \end{align*}
 A small SSR indicates a good model fit %Theresa
 
+\subsection{ANOVA}
+
+
+\begin{itemize}
+\item\textit{Data:} $Y_{i,j}$ where $i=1,...,k$ (number of groups) and $j=1,...,n_i$ (individuals in $i$th group)
+\item\textit{Hypothesis:}  $\mu_1=...=\mu_k$ (All group means are equal)
+\item \textit{Assumptions}: Independence, normality and homoscedasticity of of residuals ($\varepsilon_{i,j } \sim \mathcal{N}(0, \sigma^2) \,\, \forall i,j$).
+\item \textit{Statistic and details}: The statistic is an $F$-statistic
+$$ F=\frac{SSE/(k-1)}{SSR/(\sum_i \{n_i\}-k)}.$$
+Here 
+$$SSR= \sum_i \sum_j (Y_{i,j}- \bar Y_{i,\bullet})^2, \quad\quad SSE= \sum_i \sum_j (\bar Y_{i,\bullet}- \bar Y)^2.$$
+$F$ is $F$-distributed with $k-1$-degrees of freedom. The intuition of the statistic is: If the means of the groups vary a lot (numerator), while there is only little fluctuation inside the groups (denominator), the statistic is large and the hypothesis of equal expectations is rejected.
+\item  \textit{Violation of assumptions}: The ANOVA is for larger sample sizes robust against violations of normality. Different variances are a problem if the groups have different sizes. One might apply the "Brown–Forsythe-Test"for skewed or heavy tailed distributions. Non-parametric alternatives like the  Kruskal-Wallis-Test exist. The data may be transformed (log-transform if the errors are multiplicative; depends on what model makes sense). 
+\item \textit{Further discussion:} 
+\end{itemize}
+
+
 
 \section{Estimation}
 
