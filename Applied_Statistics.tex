@@ -272,6 +272,27 @@ The idea is for all possible events to check wether the probability $\mathbb{P}(
 
 \subsection{Likelihood ratio tests} %cutting edge statistics
 
+Likelihood ratio tests are a general principle to derive tests. Examples include
+
+\begin{itemize}
+\item t- test
+\item F-test for vairance differences
+\item global F-test (see also ANOVA)
+\end{itemize}
+
+Idea: Suppose we want to test
+$$H_0: \theta=\theta_0 \quad vs. \quad H_1: \theta = \theta_1.$$
+(More general hypotheses are of the form $\theta \in \Theta$.) According to the Neyman-Pearson Lemma the uniformly most powerful test at level $\alpha$ is the following: Reject if
+$$\Lambda(x)>\eta,$$
+where 
+$$\Lambda(x):= \frac{f^{X_1,...,X_n}(x| \theta_0)}{f^{X_1,...,X_n}(x| \theta_1)}$$
+and 
+$$ \alpha= \mathbb{P}(\Lambda(x)\le \eta | H_0).$$
+ The specific form of the statistics of the aformentioned tests, e.g. the global F-test, is derived from the specific form of the Gaussian density under the assumption of normal data. In this case we might consider the ratio of the sum of residual squares of the reduced vs. the full model. Details on relation of F-test and likelihood ratio tests are given in \url{https://www.uio.no/studier/emner/sv/oekonomi/ECON4130/h13/lecture-note-on-f-test.pdf} (pp.12-13).\\
+
+As a rule it is not possible to derive the exact distribution of the likelihood ratio statistic. Asymptotic results are available (Wilk's Theorem), which imply that under some conditions the statistic $-2 \log(\Lambda)$ approximates a chi-suqared distribution, where the degrees of freedom depend on the dimensions of the parameter spaces under the null and the alternative.
+
+
 \section{Regression}
 
 \subsection{Linear models}
