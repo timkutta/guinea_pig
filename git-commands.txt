@@ -1,0 +1,13 @@
+i steht für insert (wenn man etwas schreiben möchte)
+esc, wenn man aus dem Schreibmodus rausgehen möchte
+:w für speichern, :q für schließen
+vi, um Dateien zu erzeugen (falls es sie noch nicht gibt), bzw. um in vorhandene Dateien zu schreiben, öffnet also einen Texteditor
+cat, um sich Dateiinhalte anzeigen zu lassen
+ls, um sich Ordnerinhalte anzeigen zu lassen
+cd, um durch Ordner hindurch zu navigieren
+fetch --all, um den Stand von Origin abzufragen (wir hatten uns ja schon mal gefragt, warum der Status andauernd sagt "Ist auf demselben Stand wie Origin Master", obwohl dies gar nicht der Fall ist)
+-m bei commit, damit man direkt eine Message eingeben kann
+git reset --hard, um ein Reset auf den entsprechenden Commit anzuwenden (war hilfreich, als Git aufgrund von zu hoher Speicherauslastung abgestürzt ist)
+Commits sind Code-Versionen; mit git checkout Commit-Version_xy kann man zurückspringen. Dies erzeugt einen neuen temporären Branch; aus diesem muss man beispielsweise mit git checkout theresa wieder zurückspringen. 
+git push heißt "Ich möchte die aktuelle Code-Version im Internet veröffentlichen." 
+Wenn man bestimmte Dateien oder Order oder Dateitypen generell nicht mit versionieren möchte, kann man eine .gitignore-Datei anlegen: Dazu erstellt man sie zunächst durch vi .gitignore, danach schreibt man beispielsweise *.txt, um alle Dateien mit dieser Endung zu ignorieren. Alternativ kann man auch eine bestimmte Datei oder einen Ordner dort hinzufügen. Gitignore ist eine Textdatei, das heißt, man kann dort beliebige Dateien etc. hinzufügen bzw. herauslöschen. 
