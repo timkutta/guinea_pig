@@ -261,29 +261,46 @@ The test only works for $3<n<5000$.
 $$L_n=-2\log\left[\frac{\sup_{\theta\in\Theta_0} \mathcal{L}(\theta)}{\sup_{\theta\in\Theta} \mathcal{L}(\theta)}\right],$$
 where $\mathcal{L}$ denotes the likelihood function
 \item Reject the null hypothesis if $L_n>\chi^2_{d-c,1-\alpha}$, since the test statisitc $L_n$ is asymptotically $\chi^2$-distributed by Wilk's theorem 
+
 \end{itemize}
 \item[1.] $\chi^2$-test for independence
 \begin{itemize}
-\item \textit{Data}: Two samples of categorical valued data $X_1,...,X_n$ and $Y_1,...Y_m$. The categories for $X$ are called $c_X^1,...,c_X^K$ and for $Y$ $c_Y^1,...,c_Y^L$. 
+\item We have \textit{one} sample with paired observations. Example: Ask $1000$ people for their attitude concerning two different political statements and test whether these attitudes are independent from each other or not.
+\item \textit{Data}: Categorically valued data $(X_1,Y_1),,...,(X_n,Y_n)$. The categories for $X$ are called $c_X^1,...,c_X^K$ and for $Y$ $c_Y^1,...,c_Y^L$. 
 \item \textit{Hypothesis}: The data generating mechanisms of $X$ and $Y$ are independent.
 \item \textit{Conditions}: All data is independent, in groups the same distribution.
 \item \textit{Statistic and details}: Let $a_{k,l}$ be the number  $|\{X_i=c_k, Y_j=c_l\}|$. Then we consider 
-$$\chi^2=\sum_{k=1}^K \sum_{l=1} ^L \frac{(a_{l,k}-a_{l,k}^*)^2}{a_{l,k}^*} \quad \textnormal{where} \quad a_{l,k}^*:=\frac{a_{l, \bullet}a_{\bullet,k}}{n+m}.$$
-The idea is for all possible events to check wether the probability $\mathbb{P}(X=c_k, Y=c_l)$ factorizes. The null hypothesis is rejected if the value of the test statistic is larger than the $(1-\alpha)$-quantile of a $\chi^2$-distribution with $(n-1)\times (m-1)$ degrees of freedom.\\
+$$\chi^2=\sum_{k=1}^K \sum_{l=1} ^L \frac{(a_{l,k}-a_{l,k}^*)^2}{a_{l,k}^*} \quad \textnormal{where} \quad a_{l,k}^*:=\frac{a_{l, \bullet}a_{\bullet,k}}{n}.$$
+The idea is for all possible events to check wether the probability $\mathbb{P}(X=c_k, Y=c_l)$ factorizes: If $H_0$ holds true, then
+\begin{align*}
+p_{l,k}=p_{l,\cdot}\, p_{\cdot,k}
+\end{align*}
+and therefore 
+\begin{align*}
+\frac{a_{l,k}}{n}\approx \frac{a_{l,\cdot}}{n} \, \frac{a_{\cdot,k}}{n}.
+\end{align*}
+
+ The null hypothesis is rejected if the value of the test statistic is larger than the $(1-\alpha)$-quantile of a $\chi^2$-distribution with $(n-1)\times (m-1)$ degrees of freedom.\\
 This corresponds to the general theory of Likelihood ratio tests: 
 \begin{itemize}
-\item dimension of parameter space: $mn-1$ (one side constraint: $\sum_{k=1}^K \sum_{l=1}^L p_{l,k}=1$)
-\item dimension of null hypothesis: $m-1+n-1$ (two side constraints: $\sum_{k=1}^K p_{\cdot,k}=1$, $\sum_{l=1}^L p_{l,\cdot}=1$)
-\item dimension of parameter - dimension of null hypothesis = $mn-1-(m-1)-(n-1)=(m-1)(n-1)$
+\item dimension of parameter space: $KL-1$ (one side constraint: $\sum_{k=1}^K \sum_{l=1}^L p_{l,k}=1$)
+\item dimension of null hypothesis: $K-1+L-1$ (two side constraints: $\sum_{k=1}^K p_{\cdot,k}=1$, $\sum_{l=1}^L p_{l,\cdot}=1$)
+\item dimension of parameter - dimension of null hypothesis = $KL-1-(K-1)-(L-1)=(K-1)(L-1)$
 \end{itemize}
 \item \textit{Violation of assumptions}: The sample size should not be too small, otherwise the test lacks power. Even for $2\times 2$ it should certainly not be less than $n+m=100$ (estimate based on some limited simulations).
 
 \item \textit{Further discussion:} If the amount of data falling in any of the classes is very small, i.e. some $a_{k,l}$ are very small/equal to $0$, one might consider joining features. Otherwise convergence to a $\chi^2$-distribution is unclear. However the distribution under the $0$  can also be simulated via bootstrap, by factoring the marginal distributions.  \\
-
-
-
 \end{itemize}
+
+
 \item[2.] $\chi^2$ goodness of fit-test 
+\begin{itemize}
+\item We have \textit{more than one} sample, i.e. $m\geq 2$ samples $X_1,\ldots,X_m$ with $n_1,\ldots,n_m$ observations, respectively. Example: Ask both women and men (two different samples) for their attitute concerning a certain political statement. Test whether this attitude differs between the groups of men and women. 
+\item \textit{Data:} We focus on the case of two samples. Then: Categorically valued data $X_1,\ldots, X_{m}$, $Y_1, \ldots,Y_r$. Again, the categories for $X$ are $c_X^{1}, \ldots, c_X^{K}$, and the ones for $Y$ are $c_{Y}^{1},\ldots,c_{Y}^{L}$.
+\item \textit{Statistics and details}: As above, i.e.
+$$\chi^2=\sum_{k=1}^K \sum_{l=1} ^L \frac{(a_{l,k}-a_{l,k}^*)^2}{a_{l,k}^*} \quad \textnormal{where} \quad a_{l,k}^*:=\frac{a_{l, \bullet}a_{\bullet,k}}{m+r},$$
+where $a_{k,l}$ is the number  $|\{X_i=c_k, Y_j=c_l\}|$.
+\end{itemize}
 \item[3.] $\chi^2$ test of homogeneity
 \end{itemize}
 
