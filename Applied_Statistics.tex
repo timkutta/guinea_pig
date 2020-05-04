@@ -254,7 +254,7 @@ The test only works for $3<n<5000$.
 \subsubsection{Checking for a independence}
 
 \begin{itemize}
-\item Likelihood ratio-tests: Basic idea:
+\item \textbf{Likelihood ratio-tests: Basic idea}
 \begin{itemize}
 \item Let $\theta$ be a $d$-dimensional parameter and $\Theta_0$ a $c$-dimensional subset of the parameter space $\Theta$
 \item $H_0: \theta\in \Theta_0$ vs. $H_1:\theta\in \Theta\setminus \Theta_0$,
@@ -263,14 +263,18 @@ where $\mathcal{L}$ denotes the likelihood function
 \item Reject the null hypothesis if $L_n>\chi^2_{d-c,1-\alpha}$, since the test statisitc $L_n$ is asymptotically $\chi^2$-distributed by Wilk's theorem 
 
 \end{itemize}
-\item[1.] $\chi^2$-test for independence
+\item[1.] \textbf{$\chi^2$-test for independence: Are two features statistically independent?}
 \begin{itemize}
 \item We have \textit{one} sample with paired observations. Example: Ask $1000$ people for their attitude concerning two different political statements and test whether these attitudes are independent from each other or not.
 \item \textit{Data}: Categorically valued data $(X_1,Y_1),,...,(X_n,Y_n)$. The categories for $X$ are called $c_X^1,...,c_X^K$ and for $Y$ $c_Y^1,...,c_Y^L$. 
 \item \textit{Hypothesis}: The data generating mechanisms of $X$ and $Y$ are independent.
 \item \textit{Conditions}: All data is independent, in groups the same distribution.
-\item \textit{Statistic and details}: Let $a_{k,l}$ be the number  $|\{X_i=c_k, Y_j=c_l\}|$. Then we consider 
+\item \textit{Statistic and details}: Let $a_{k,l}$ be the number  $|\{X_i=c_X^k, Y_j=c_Y^l\}|$. Then we consider 
 $$\chi^2=\sum_{k=1}^K \sum_{l=1} ^L \frac{(a_{l,k}-a_{l,k}^*)^2}{a_{l,k}^*} \quad \textnormal{where} \quad a_{l,k}^*:=\frac{a_{l, \bullet}a_{\bullet,k}}{n}.$$
+This corresponds to
+\begin{align*}
+\sum \frac{(\text{observed-expected})^2}{\text{expected}}
+\end{align*}
 The idea is for all possible events to check wether the probability $\mathbb{P}(X=c_k, Y=c_l)$ factorizes: If $H_0$ holds true, then
 \begin{align*}
 p_{l,k}=p_{l,\cdot}\, p_{\cdot,k}
@@ -279,29 +283,73 @@ and therefore
 \begin{align*}
 \frac{a_{l,k}}{n}\approx \frac{a_{l,\cdot}}{n} \, \frac{a_{\cdot,k}}{n}.
 \end{align*}
+\medskip
 
- The null hypothesis is rejected if the value of the test statistic is larger than the $(1-\alpha)$-quantile of a $\chi^2$-distribution with $(n-1)\times (m-1)$ degrees of freedom.\\
+\begin{center}
+\begin{tabular}{|c|c|c|c|l|r|}
+\hline
+& \multicolumn{4}{l|}{Features of $X$} & Sum \\
+\hline
+Features of $Y$ & $c_X^{1}$ & $c_X^2$ & \ldots & $c_X^K$ &  \\
+\hline
+$c_Y^1$ & $a_{11}$ & $a_{12}$ & \ldots & $a_{1K}$ & $a_{1 \cdot}$ \\
+\hline
+$c_Y^2$ & $a_{21}$ & $a_{22}$ & \ldots & $a_{2K}$ & $a_{2 \cdot}$ \\
+\hline
+\ldots & \ldots & \ldots & \ldots & \ldots & \ldots \\
+\hline
+$c_Y^L$ &  $a_{L1}$ & $a_{L2}$ & \ldots & $a_{LK}$ & $a_{L \cdot}$ \\
+\hline
+Sum & $a_{\cdot 1}$ & $a_{\cdot 2}$ & \ldots & $a_{\cdot K}$ & $n$\\
+\hline
+\end{tabular}
+\end{center}
+
+\medskip
+
+ The null hypothesis is rejected if the value of the test statistic is larger than the $(1-\alpha)$-quantile of a $\chi^2$-distribution with $(K-1)\times (L-1)$ degrees of freedom.\\
 This corresponds to the general theory of Likelihood ratio tests: 
 \begin{itemize}
 \item dimension of parameter space: $KL-1$ (one side constraint: $\sum_{k=1}^K \sum_{l=1}^L p_{l,k}=1$)
 \item dimension of null hypothesis: $K-1+L-1$ (two side constraints: $\sum_{k=1}^K p_{\cdot,k}=1$, $\sum_{l=1}^L p_{l,\cdot}=1$)
 \item dimension of parameter - dimension of null hypothesis = $KL-1-(K-1)-(L-1)=(K-1)(L-1)$
 \end{itemize}
-\item \textit{Violation of assumptions}: The sample size should not be too small, otherwise the test lacks power. Even for $2\times 2$ it should certainly not be less than $n+m=100$ (estimate based on some limited simulations).
-
+\item \textit{Violation of assumptions}: The sample size should not be too small, otherwise the test lacks power. 
 \item \textit{Further discussion:} If the amount of data falling in any of the classes is very small, i.e. some $a_{k,l}$ are very small/equal to $0$, one might consider joining features. Otherwise convergence to a $\chi^2$-distribution is unclear. However the distribution under the $0$  can also be simulated via bootstrap, by factoring the marginal distributions.  \\
 \end{itemize}
 
 
-\item[2.] $\chi^2$ goodness of fit-test 
+\item[3.] \textbf{$\chi^2$ test of homogeneity: Are two samples taken from a homogeneous population (or does a certain feature follow the same distribution within those samples)?}
 \begin{itemize}
 \item We have \textit{more than one} sample, i.e. $m\geq 2$ samples $X_1,\ldots,X_m$ with $n_1,\ldots,n_m$ observations, respectively. Example: Ask both women and men (two different samples) for their attitute concerning a certain political statement. Test whether this attitude differs between the groups of men and women. 
-\item \textit{Data:} We focus on the case of two samples. Then: Categorically valued data $X_1,\ldots, X_{m}$, $Y_1, \ldots,Y_r$. Again, the categories for $X$ are $c_X^{1}, \ldots, c_X^{K}$, and the ones for $Y$ are $c_{Y}^{1},\ldots,c_{Y}^{L}$.
+\item \textit{Data:} We focus on the case of two samples. Then: Categorically valued data $X_{11},\ldots, X_{1,n_1}$, $X_{21}, \ldots,X_{2,n_2}$. The categories are called $c^{1}, \ldots, c^{K}$.
 \item \textit{Statistics and details}: As above, i.e.
 $$\chi^2=\sum_{k=1}^K \sum_{l=1} ^L \frac{(a_{l,k}-a_{l,k}^*)^2}{a_{l,k}^*} \quad \textnormal{where} \quad a_{l,k}^*:=\frac{a_{l, \bullet}a_{\bullet,k}}{m+r},$$
 where $a_{k,l}$ is the number  $|\{X_i=c_k, Y_j=c_l\}|$.
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|l|r|}
+\hline
+& \multicolumn{4}{l|}{Features of $X$} & Sum \\
+\hline
+Sample $X_i$ & $c_X^{1}$ & $c_X^2$ & \ldots & $c_X^K$ &  \\
+\hline
+$X_1$ & $a_{11}$ & $a_{12}$ & \ldots & $a_{1K}$ & $a_{1 \cdot}$ \\
+\hline
+$X_2$ & $a_{21}$ & $a_{22}$ & \ldots & $a_{2K}$ & $a_{2 \cdot}$ \\
+\hline
+\ldots & \ldots & \ldots & \ldots & \ldots & \ldots \\
+\hline
+$X_m$ &  $a_{L1}$ & $a_{L2}$ & \ldots & $a_{LK}$ & $a_{L \cdot}$ \\
+\hline
+Sum & $a_{\cdot 1}$ & $a_{\cdot 2}$ & \ldots & $a_{\cdot K}$ & $n$\\
+\hline
+\end{tabular}
+\end{center}
+
+\item \textit{Violation of assumptions}: The sample size should not be too small, otherwise the test lacks power. Even for $2\times 2$ it should certainly not be less than $n+m=100$ (estimate based on some limited simulations).
 \end{itemize}
-\item[3.] $\chi^2$ test of homogeneity
+\item[2.] $\chi^2$ goodness of fit-test 
 \end{itemize}
 
 \subsection{Likelihood ratio tests} %cutting edge statistics
