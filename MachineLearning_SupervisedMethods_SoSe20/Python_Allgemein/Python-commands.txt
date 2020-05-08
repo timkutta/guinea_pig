@@ -1,3 +1,4 @@
 
 python3: Zum Öffnen von Python
 quit(): Zum Verlassen von Python
+mv file_name.ipynb.txt file_name.ipynb: Wenn man eine ipynb-Datei, die als ipynb.txt heruntergeladen wurde, in eine ipynb umwandeln möchte
