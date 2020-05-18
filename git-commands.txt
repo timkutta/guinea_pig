@@ -1,3 +1,4 @@
+command n erzeugt neues Fenster
 i steht für insert (wenn man etwas schreiben möchte)
 esc, wenn man aus dem Schreibmodus rausgehen möchte
 :w für speichern, :q für schließen
