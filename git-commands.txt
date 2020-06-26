@@ -1,3 +1,7 @@
+control c, um Prozess abzubrechen
+rm steht für remove; rm -r
+Mit cd - geht man einmal im Verzeichnis zurück
+command n erzeugt neues Fenster
 i steht für insert (wenn man etwas schreiben möchte)
 esc, wenn man aus dem Schreibmodus rausgehen möchte
 :w für speichern, :q für schließen
